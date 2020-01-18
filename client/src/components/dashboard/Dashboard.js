@@ -21,7 +21,7 @@ class Dashboard extends Component {
             <h4>
               <b>Hey there,</b> {user.name.split(" ")[0]}
               <p className="flow-text white-text ">
-                You are logged into song-note app
+                Hello You are logged into song-note app
               </p>
             </h4>
             <button
