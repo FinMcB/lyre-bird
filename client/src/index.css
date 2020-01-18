@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #028090;
+  font-family: 'Quicksand', sans-serif,'Roboto', sans-serif
+  ,'Montserrat', sans-serif
+  ,'Lato', sans-serif
+  , 'Raleway', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
