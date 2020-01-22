@@ -14,6 +14,8 @@ import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import LyricEditor from "./components/lyrics/Editor";
+import Tuner from "./components/tuner/guitarTuner";
+
 
 
 import "./App.css";
@@ -48,6 +50,8 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/lyrics" component={LyricEditor} />
+            <Route exact path="/guitarTuner" component={Tuner} />
+
 
 
             <Switch>

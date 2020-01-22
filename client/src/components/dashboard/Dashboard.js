@@ -54,20 +54,22 @@ class Dashboard extends Component {
                 </button>
               </div>
               <div className="col s6 center-align">
-                <button
+                <Link
+                  to="/guitarTuner"
                   style={{
                     width: "150px",
                     height: "150px",
                     borderRadius: "3px",
                     letterSpacing: "1.5px",
                     marginTop: "1rem"
+
                   }}
-                  onClick={this.onLogoutClick}
                   className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                 >
                 <i class="material-icons right">build</i>
+
                   Tuner
-                </button>
+                </Link>
               </div>
             </div>
             <div className="row">
