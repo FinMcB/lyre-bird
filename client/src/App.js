@@ -7,6 +7,9 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
 
+import P5Wrapper from 'react-p5-wrapper';
+import * as p5 from 'p5/lib/addons/p5.sound.min.js';
+
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
@@ -15,6 +18,7 @@ import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import LyricEditor from "./components/lyrics/Editor";
 import Tuner from "./components/tuner/guitarTuner";
+import Recorder from "./components/audio/recorder";
 
 
 
@@ -51,7 +55,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/lyrics" component={LyricEditor} />
             <Route exact path="/guitarTuner" component={Tuner} />
-
+            <Route exact path="/recorder" component={Recorder} />
 
 
             <Switch>
