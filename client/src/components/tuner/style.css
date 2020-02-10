@@ -1,0 +1,24 @@
+
+html, body {
+  height: 100%;
+  font-family: 'Quicksand', sans-serif,'Roboto', sans-serif
+  ,'Montserrat', sans-serif
+  ,'Lato', sans-serif
+  , 'Raleway', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+body {
+  margin: 100px;
+
+  /* display: flex;
+ */
+
+  /* This centers our sketch horizontally. */
+  /* justify-content: center; */
+
+  /* This centers our sketch vertically. */
+  /* align-items: center; */
+}

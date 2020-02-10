@@ -94,7 +94,7 @@ class Dashboard extends Component {
 
               <div className="col s6 center-align">
                 <Link
-                  to="/recorder"
+                  to="/player"
                   style={{
                     width: "150px",
                     height: "150px",
