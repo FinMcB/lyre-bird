@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom';
 import P5Wrapper from 'react-p5-wrapper';
 import sketch from './sketch';
 import 'p5/lib/addons/p5.sound';
-
-
-
+import multer from 'multer'
 
 class Player extends React.Component{
 
@@ -24,9 +22,16 @@ class Player extends React.Component{
 
 	render () {
 		return (
+			<div className="col s1 center-align" style={{}}>
+
+
 			<div className="row">
 			<P5Wrapper sketch={sketch} />
 			</div>
+			<a id="micInitBtn" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+			<a id="recBtn" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">mic</i></a>
+
+		</div>
 
 		// </div>
 		// 		<input type="range" value={this.state.rotation}  min="0"  max="360" step="1" onInput={this.rotationChange.bind(this)}/>

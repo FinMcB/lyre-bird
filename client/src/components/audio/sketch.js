@@ -3,23 +3,39 @@ import 'p5/lib/addons/p5.sound';
 
 export default function sketch (p) {
 
-  let mic, recorder, soundFile, soundBlob, recording, system;
+  let mic, recorder, soundFile, soundBlob, recording, system, vol;
+  let slider;
+  let timer = 1;
+  let recColour = p.color(159, 70, 143);
+  let micInitBtn = p.select('#micInitBtn');
+  let recBtn = p.select('#recBtn').hide();
+  let media;
+
+
 
 
 let state = 0; // mousePress will increment from Record, to Stop, to Play
 
   p.setup = function(){
-    p.createCanvas(400, 400);
-    system = new ParticleSystem(p.createVector(p.width / 2, 50));
+    slider = p.createSlider(0, 255, 100);
+     slider.position(200, 400);
+     slider.style('width', '80px');
+    // recBtn.hide();
 
-    p.background(200);
+    var cnv = p.createCanvas(p.windowWidth, 450, p.WEBGL);
+    cnv.style('display', 'inline');
+    // windowResized();
+
+
+    var audioContext = new AudioContext();
+    media = p5.MediaElement;
+    system = new ParticleSystem(p.createVector(0, 0));
+
     p.fill(0);
     p.text('Enable mic and click the mouse to begin recording', 20, 20);
-    let audio = p.createButton('play');
-    audio.mousePressed(fun);
 
-    let test = p.createButton('test');
-    test.mousePressed(micInit);
+    micInitBtn.mousePressed(micInit);
+    recBtn.mousePressed(record);
 
     // create an audio in
     mic = new p5.AudioIn();
@@ -27,6 +43,7 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
     // users must manually enable their browser microphone for recording to work properly!
     function micInit()  {
       mic.start();
+      recBtn.show().position(p.windowWidth, 500);
     }
     // create a sound recorder
     recorder = new p5.SoundRecorder();
@@ -36,30 +53,45 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
 
     // create an empty sound file that we will use to playback the recording
     soundFile = new p5.SoundFile();
+
   }
 
+  function windowResized() {
+    p.resizeCanvas(p.windowWidth);
+    }
+
   p.draw = function(){
+    p.background(51);
   // console.log(state);
   // console.log("mic active ? : " + mic.enabled)
   // console.log("mic source ? : " + mic.currentSource)
   //  console.log("mic input ? : " + mic.input)
-   let vol = mic.getLevel();
-    p.fill(127);
-    p.stroke(0);
+    if(mic){
+      vol = mic.getLevel();
+      console.log(vol);
 
-    // Draw an ellipse with height based on volume
-    let h = p.map(vol, 0, 1, p.height, 0);
-    p.ellipse(p.width / 2, h - 25, 50, 50);
+    };
+
+
+
+
 
     system.addParticle();
     system.run();
+
+    p.stroke(recColour);
+    p.strokeWeight(9);
+    p.fill(2,128,144);
+    p.ellipse(0,0, 80);
+
   }
 
-  let Particle = function(position){
-    this.acceleration = p.createVector(0, 0.05);
-    this.velocity = p.createVector(p.random(-1,1), p.random(-1,0));
+  // A simple Particle class
+  let Particle = function(position) {
+    this.acceleration = p.createVector(0, 0);
+    this.velocity = p.createVector(p.random(-4, 4), p.random(-4, 4));
     this.position = position.copy();
-    this.lifespan = 255;
+    this.lifespan = 50;
   };
 
   Particle.prototype.run = function() {
@@ -67,17 +99,19 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
     this.display();
   };
 
-  Particle.prototype.update = function() {
-      this.velocity.add(this.acceleration);
-      this.position.add(this.velocity);
-      this.lifespan -= 2;
+  // Method to update position
+  Particle.prototype.update = function(){
+    this.velocity.add(this.acceleration);
+    this.position.add(this.velocity);
+    this.lifespan -= 0.8;
   };
 
   // Method to display
   Particle.prototype.display = function() {
     p.stroke(200, this.lifespan);
-    p.strokeWeight(2);
-    p.fill(127, this.lifespan);
+    p.strokeWeight(3);
+    let colour = p.map(vol, 0, 0.02, 0,255);
+    p.fill(colour, this.lifespan);
     p.ellipse(this.position.x, this.position.y, 12, 12);
   };
 
@@ -95,17 +129,21 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
     this.particles.push(new Particle(this.origin));
   };
 
+
+
+
+
   ParticleSystem.prototype.run = function() {
     for (let i = this.particles.length-1; i >= 0; i--) {
-      let p = this.particles[i];
-      p.run();
-      if (p.isDead()) {
+      let partArr = this.particles[i];
+      partArr.run();
+      if (partArr.isDead()) {
         this.particles.splice(i, 1);
       }
     }
   };
 
-  function fun() {
+  function record() {
     // use the '.enabled' boolean to make sure user enabled the mic (otherwise we'd record silence)
     if (state === 0 && mic.enabled) {
       // Tell recorder to record to a p5.SoundFile which we will use for playback
@@ -113,16 +151,19 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
 
       p.background(255, 0, 0);
       p.text('Recording now! Click to stop.', 20, 20);
+      recColour = p.color(255, 54, 54);
       state++;
     } else if (state === 1) {
       recorder.stop(); // stop recorder, and send the result to soundFile
-
+      recColour = p.color(159, 70, 143);
       p.background(0, 255, 0);
       p.text('Recording stopped. Click to play & save', 20, 20);
       state++;
     } else if (state === 2) {
-      soundFile.play(); // play the result!
+      // soundFile.play(); // play the result!
       soundBlob = soundFile.getBlob();
+      let blobUrl = URL.createObjectURL(soundBlob);
+      let htmlAudioElt = p.createAudio(blobUrl).showControls();
       console.log(soundBlob);
       let serverUrl = 'https://jsonplaceholder.typicode.com/posts';
       let httpRequestOptions = {
@@ -132,11 +173,10 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
           'Content-Type': 'multipart/form-data'
         })
       }
-      p.httpDo(serverUrl, httpRequestOptions);
-      let blobUrl = URL.createObjectURL(soundBlob);
-      let htmlAudioElt = p.createAudio(blobUrl).showControls();
+      // p.httpDo(serverUrl, httpRequestOptions);
 
-      p.saveSound(soundFile, 'mySound.wav'); // save file
+
+      // p.saveSound(soundFile, 'mySound.wav'); // save file
       state++;
     }
   }
