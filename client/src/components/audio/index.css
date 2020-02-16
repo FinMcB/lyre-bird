@@ -36,3 +36,15 @@ footer {
   color: #fff;
   text-align: center;
 }
+
+.App-table {
+  width: 70%;
+  margin: 10px auto;
+  border-collapse: collapse;
+}
+.App-table th {
+  border: 1px solid black;
+}
+.App-table td {
+  border: 1px solid black;
+}
