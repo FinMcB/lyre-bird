@@ -2267,6 +2267,8 @@ figure {
  * 2. Show the overflow in Edge and IE.
  */
 hr {
+  border-top: 20px solid #02C39A;
+
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
   /* 1 */
@@ -4573,7 +4575,7 @@ html {
 h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
   line-height: 1.3;
-  color: #02C39A
+  color: #028090;
 }
 
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
@@ -5905,6 +5907,32 @@ body.keyboard-focused .dropdown-content li:focus {
   max-height: 45%;
   border-radius: 0;
   will-change: bottom, opacity;
+}
+
+.Collapsible{
+  width: 100%;
+  margin: auto;
+  margin-top: 1rem;
+  border: 5px solid red;
+  border-color: #02C39A;
+  font-weight: light;
+  font-size: 2rem;
+  color: #9F468F;
+  background: #FFF8e3;
+  border-radius: 10px;
+  text-align: center;
+
+}
+
+.Collapsible__contentInner{
+  margin: auto;
+}
+
+.Collapsible__contentOuter{
+  padding-left: 0rem;
+  background: #FFF8e3;
+
+
 }
 
 .collapsible {

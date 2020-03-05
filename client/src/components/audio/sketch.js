@@ -6,7 +6,7 @@ export default function sketch (p) {
   let mic, recorder, soundFile, soundBlob, recording, system, vol;
   let slider;
   let timer = 1;
-  let recColour = p.color(159, 70, 143);
+  let recColour = p.color('rgba(159, 70, 143,0.5)');
   let micInitBtn = p.select('#micInitBtn');
   let recBtn = p.select('#recBtn').hide();
   let media;
@@ -17,12 +17,12 @@ export default function sketch (p) {
 let state = 0; // mousePress will increment from Record, to Stop, to Play
 
   p.setup = function(){
-    slider = p.createSlider(0, 255, 100);
-     slider.position(200, 400);
-     slider.style('width', '80px');
+    // slider = p.createSlider(0, 255, 100);
+    //  slider.position(200, 400);
+    //  slider.style('width', '80px');
     // recBtn.hide();
 
-    var cnv = p.createCanvas(p.windowWidth, 450, p.WEBGL);
+    var cnv = p.createCanvas(p.windowWidth, 350, p.WEBGL);
     cnv.style('display', 'inline');
     // windowResized();
 
@@ -43,7 +43,7 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
     // users must manually enable their browser microphone for recording to work properly!
     function micInit()  {
       mic.start();
-      recBtn.show().position(p.windowWidth, 500);
+      recBtn.show();
     }
     // create a sound recorder
     recorder = new p5.SoundRecorder();
@@ -68,20 +68,20 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
   //  console.log("mic input ? : " + mic.input)
     if(mic){
       vol = mic.getLevel();
-      console.log(vol);
+      // console.log(vol);
 
     };
 
 
 
-
+    // console.log(state);
 
     system.addParticle();
     system.run();
 
     p.stroke(recColour);
     p.strokeWeight(9);
-    p.fill(2,128,144);
+    p.fill('rgba(2,128,144,1)');
     p.ellipse(0,0, 80);
 
   }
@@ -110,8 +110,12 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
   Particle.prototype.display = function() {
     p.stroke(200, this.lifespan);
     p.strokeWeight(3);
-    let colour = p.map(vol, 0, 0.02, 0,255);
-    p.fill(colour, this.lifespan);
+    let rnd = p.random(10,255);
+    let r = p.map(vol, 0, 0.08, 0, rnd);
+    let g = p.map(vol, 0, 0.05 , 0,rnd);
+    let b = p.map(vol, 0, 0.05 , 0,rnd);
+
+    p.fill(rnd, rnd, b,this.lifespan);
     p.ellipse(this.position.x, this.position.y, 12, 12);
   };
 
@@ -151,11 +155,11 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
 
       p.background(255, 0, 0);
       p.text('Recording now! Click to stop.', 20, 20);
-      recColour = p.color(255, 54, 54);
+      recColour = p.color('rgba(255, 54, 54,0.8)');
       state++;
     } else if (state === 1) {
       recorder.stop(); // stop recorder, and send the result to soundFile
-      recColour = p.color(159, 70, 143);
+      recColour = p.color('rgba(159, 70, 143,0.8)');
       p.background(0, 255, 0);
       p.text('Recording stopped. Click to play & save', 20, 20);
       state++;

@@ -17,7 +17,9 @@ import Dashboard from "./components/dashboard/Dashboard";
 import LyricEditor from "./components/lyrics/Editor";
 import Tuner from "./components/tuner/guitarTuner";
 import Player from "./components/audio/player";
-
+import Song from "./components/newSong/song";
+import MySongs from "./components/library/mySongs";
+import Chord from "./components/diagram/chord.js"
 
 
 import "./App.css";
@@ -55,6 +57,10 @@ class App extends Component {
             <Route exact path="/lyrics" component={LyricEditor} />
             <Route exact path="/guitarTuner" component={Tuner} />
             <Route exact path="/player" component={Player} />
+            <Route exact path="/song" component={Song} />
+              <Route exact path="/mySongs" component={MySongs} />
+
+
 
 
             <Switch>

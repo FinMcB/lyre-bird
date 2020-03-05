@@ -7,10 +7,10 @@ import './style.css'
 
 
 export default function sketch (p) {
-  // let myFont;
-  //   p.preload = function () {
-  //   myFont = p.loadFont("client/public/assets/quicksand.otf");
-  // }
+  let myFont;
+    p.preload = function () {
+    myFont = p.loadFont("client/public/assets/quicksand.otf");
+  }
 
   const model = 'https://cdn.jsdelivr.net/gh/ml5js/ml5-data-and-models/models/pitch-detection/crepe/';
   const THRESHOLD = 2;

@@ -14,8 +14,7 @@ class Navbar extends Component {
               }}
               className="col s5 brand-logo center blue-text"
             >
-              <i className="material-icons">mic_none</i>
-              <b>song-note</b>
+              <b>lyre-bird</b>
             </Link>
           </div>
         </nav>

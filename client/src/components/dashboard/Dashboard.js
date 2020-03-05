@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
+import But from "../button/index.js"
+import M from 'materialize-css'
+import { Button, Card, Row, Col } from 'react-materialize';
+
 
 
 class Dashboard extends Component {
@@ -14,109 +18,102 @@ class Dashboard extends Component {
   render() {
     const { user } = this.props.auth;
 
+
     return (
-      <div style={{ height: "75vh" }} className="container valign-wrapper">
-        <div className="row">
-          <div className="landing-copy col s12 center-align">
-            <h4>
-              <b>Hey there,</b> {user.name.split(" ")[0]}
-              <p className="flow-text white-text ">
-                Hello You are logged into song-note app
-              </p>
-            </h4>
-            <button
-              style={{
-                width: "150px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px",
-                marginTop: "1rem"
-              }}
-              onClick={this.onLogoutClick}
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-            >
-              Logout
-            </button>
-            <div className="row">
-              <div className="col s6 center-align">
-                <button
-                  style={{
-                    width: "150px",
-                    height: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.3px",
-                    marginTop: "1rem"
-                  }}
-                  onClick={this.onLogoutClick}
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                <i class="material-icons right"style={{ }}>audiotrack</i>
-                Songs
-                </button>
-              </div>
-              <div className="col s6 center-align">
-                <Link
-                  to="/guitarTuner"
-                  style={{
-                    width: "150px",
-                    height: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
+      ////////////////////LOGOUT BUTTON////////////////////////
+      <React.Fragment>
 
-                  }}
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                <i class="material-icons right">build</i>
+      <div style={{ paddingTop: "10vh" }} className="container valign-wrapper">
+         <div className="row">
+           <div className="landing-copy col s12 center-align">
+             <h4>
+               <b>Welcome,</b> {user.name.split(" ")[0]}
+               <p className="flow-text white-text ">
+                 Hello you are logged into song-note app
+               </p>
+             </h4>
+           </div>
+         </div>
+       </div>
+       <div className="container">
+         <div className="row">
+           <div class="col s4">
+             <Link
+               to="/song"
+               style={{
+                 width: "150px",
+                 height: "150px",
+                 borderRadius: "3px",
+                 letterSpacing: "1.5px",
+                 marginTop: "1rem"
 
-                  Tuner
-                </Link>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col s6 center-align">
-                <Link
-                  to="/lyrics"
-                  style={{
-                    width: "150px",
-                    height: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
+               }}
+               className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+             >
+             <i class="material-icons right">mic</i>
 
-                  }}
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                <i class="material-icons right">notes</i>
+               New Song
+             </Link>
+           </div>
+           <div class="col s4">
+             <Link
+               to="/guitarTuner"
+               style={{
+                 width: "150px",
+                 height: "150px",
+                 borderRadius: "3px",
+                 letterSpacing: "1.5px",
+                 marginTop: "1rem"
 
-                  Lyrics
-                </Link>
-              </div>
+               }}
+               className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+             >
+             <i class="material-icons right">build</i>
 
-              <div className="col s6 center-align">
-                <Link
-                  to="/player"
-                  style={{
-                    width: "150px",
-                    height: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
+              Tuner
+             </Link>
+           </div>
+           <div class="col s4">
+             <Link
+               to="/mySongs"
+               style={{
+                 width: "150px",
+                 height: "150px",
+                 borderRadius: "3px",
+                 letterSpacing: "1.5px",
+                 marginTop: "1rem"
 
-                  }}
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                <i class="material-icons right">add</i>
+               }}
+               className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+             >
+             <i class="material-icons right">list</i>
 
-                  New Song
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+               My Songs
+             </Link>
+           </div>
+         </div>
+       </div>
+       <div className="col s12 center-align" style={{paddingTop: "10vh"}}>
+         <button
+           style={{
+             width: "150px",
+             borderRadius: "3px",
+             letterSpacing: "1.5px",
+             marginTop: "1rem"
+           }}
+           onClick={this.onLogoutClick}
+           className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+         >
+           Logout
+         </button>
+       </div>
+      </React.Fragment>
+     );
+   }
+
 }
+
+
 
 Dashboard.propTypes = {
   logoutUser: PropTypes.func.isRequired,

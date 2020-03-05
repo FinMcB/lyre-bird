@@ -4,6 +4,8 @@ import sketch from './sketch';
 import sketch2 from './sketch2';
 import './style.css'
 import 'p5/lib/addons/p5.sound';
+import P5Wrapper from 'react-p5-wrapper';
+
 
 
 
@@ -30,6 +32,8 @@ class Tuner extends React.Component{
 		return (
 			<div className="col s1 center-align" style={{}}>
 			<div className="row">
+				<P5Wrapper sketch={sketch} />
+
 			</div>
 		  </div>
 
