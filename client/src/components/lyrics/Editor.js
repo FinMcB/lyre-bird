@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import Delta from 'quill-delta';
 import ReactQuill from 'react-quill'; // ES6
 import 'react-quill/dist/quill.snow.css'; // ES6
+import { Button, Card, Row, Col } from 'react-materialize';
+
 // import Chord;
 
 
@@ -21,8 +23,7 @@ this.handleChange = this.handleChange.bind(this);
 modules = {
    toolbar: [
      [{ 'header': [1, 2, false] }],
-     ['bold', 'italic', 'underline','strike'],
-     ['clean']
+     ['bold']
    ],
  }
 
@@ -48,14 +49,13 @@ onSubmit(e) {
     return (
 
       <ReactQuill
+          style={{width:'100%', padding:'0px', margin:'auto'}}
           name="editor"
           modules={this.modules}
           onChange={this.handleChange}
           value={this.state.editor || ''} >
 
       </ReactQuill>
-
-
     )
 
   }
@@ -68,11 +68,9 @@ ReactDOM.render(element, document.getElementById('root'));
 
 export default props => {
   return (
-    <div className="col s1 center-align" style={{paddingtop: "10rem", margin: "0rem"}}>
     <div className="row">
       <LyricEditor />
     </div>
 
-    </div>
   )
 };

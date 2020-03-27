@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { useMediaQuery } from 'react-responsive'
+
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";

@@ -10,8 +10,14 @@ import LyricEditor from "../lyrics/Editor";
 import Tuner from "../tuner/guitarTuner";
 import Player from "../audio/player";
 import Chord from "../diagram/chord.js"
-
 import Collapsible from 'react-collapsible';
+import FooterPlayer from "../footerPlayer/FooterPlayer"
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import MediaQuery from 'react-responsive'
+
+
 
 class Song extends Component {
 
@@ -24,23 +30,53 @@ class Song extends Component {
       <React.Fragment>
       <div className="landing-copy col s12 center-align">
         <div className="col s12 center-align" style={{padding: "1vh", background :"#c590bb", fontColor: "#FFF8E3"}}>
-          <h3>Create a song</h3>
+          <h5>Create a song</h5>
         </div>
       </div>
       <br></br>
 
-      <Collapsible trigger="Lyrics" open="true">
-          <LyricEditor />
-      </Collapsible>
 
-      <Collapsible  transitionTime="400" trigger="Record" >
-      <Player />
-      </Collapsible>
 
-      <Collapsible trigger="Chords">
-      <Chord />
 
-      </Collapsible>
+
+        <Row>
+        <Col
+          style={{color: "white"}}
+          s={12}
+          l={4}                  >
+          <Collapsible trigger="Chords" open="true">
+            <LyricEditor />
+          </Collapsible>
+        </Col>
+        <Col
+          textAlign= 'center-align'
+          s={12}
+          l={4}           >
+          <Collapsible trigger="Chords" open="true">
+            <Chord />
+          </Collapsible>
+        </Col>
+        <Col
+          s={12}
+          l={4}                  >
+          <Collapsible trigger="Chords" open="true">
+            <Player />
+          </Collapsible>
+        </Col>
+      </Row>
+
+
+
+
+
+
+    <FooterPlayer />
+
+
+
+
+
+
 
 
 
