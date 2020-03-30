@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import But from "../button/index.js"
 import M from 'materialize-css'
 import { Button, Card, Row, Col } from 'react-materialize';
+import { AwesomeButton } from "react-awesome-button";
+import AwesomeButtonStyles from "react-awesome-button/src/styles/styles.scss";
 
 
 
@@ -15,6 +17,10 @@ class Dashboard extends Component {
     this.props.logoutUser();
   };
 
+  myfunction() {
+        console.log("CLICKED");
+  }
+
   render() {
     const { user } = this.props.auth;
 
@@ -22,91 +28,94 @@ class Dashboard extends Component {
     return (
       ////////////////////LOGOUT BUTTON////////////////////////
       <React.Fragment>
+      <div>
+      <h1 style={{textAlign:'center'}}>Hello {this.props.user} signed in</h1>
+      </div>
+       <Row style={{textAlign: "center", marginTop:'10vh'}}>
+       <Col
+         style={{color: "white"}}
+         s={12}
+         l={4}                  >
+         <AwesomeButton type="primary" style={{width: "300px" ,height:"300px",    borderRadius: "3px",
+            padding: 'none',
+            letterSpacing: "1.5px",
+            marginTop: "1rem"}}>
+                My Songs
+            <img  src="https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png"
+            alt="my image"
+            style={{ maxWidth:'100%', maxHeight:'100%', zIndex:'+100'}}
+        />
 
-      <div style={{ paddingTop: "10vh" }} className="container valign-wrapper">
-         <div className="row">
-           <div className="landing-copy col s12 center-align">
-             <h4>
-               <b>Welcome,</b> {user.name.split(" ")[0]}
-               <p className="flow-text white-text ">
-                 Hello you are logged into song-note app
-               </p>
-             </h4>
-           </div>
-         </div>
-       </div>
-       <div className="container">
-         <div className="row">
-           <div class="col s4">
-             <Link
-               to="/song"
-               style={{
-                 width: "150px",
-                 height: "150px",
-                 borderRadius: "3px",
-                 letterSpacing: "1.5px",
-                 marginTop: "1rem"
+        <Link
 
-               }}
-               className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-             >
-             <i class="material-icons right">mic</i>
+          to="/mySongs"></Link>
+        </AwesomeButton>
 
-               New Song
-             </Link>
-           </div>
-           <div class="col s4">
-             <Link
-               to="/guitarTuner"
-               style={{
-                 width: "150px",
-                 height: "150px",
-                 borderRadius: "3px",
-                 letterSpacing: "1.5px",
-                 marginTop: "1rem"
+       </Col>
+       <Col
+         textAlign= 'center-align'
+         s={12}
+         l={4}           >
+         <Link
 
-               }}
-               className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-             >
-             <i class="material-icons right">build</i>
-
-              Tuner
-             </Link>
-           </div>
-           <div class="col s4">
-             <Link
-               to="/mySongs"
-               style={{
-                 width: "150px",
-                 height: "150px",
-                 borderRadius: "3px",
-                 letterSpacing: "1.5px",
-                 marginTop: "1rem"
-
-               }}
-               className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-             >
-             <i class="material-icons right">list</i>
-
-               My Songs
-             </Link>
-           </div>
-         </div>
-       </div>
-       <div className="col s12 center-align" style={{paddingTop: "10vh"}}>
-         <button
+           to="/mySongs"
            style={{
              width: "150px",
+             height: "150px",
              borderRadius: "3px",
              letterSpacing: "1.5px",
              marginTop: "1rem"
+
            }}
-           onClick={this.onLogoutClick}
+
            className="btn btn-large waves-effect waves-light hoverable blue accent-3"
          >
-           Logout
-         </button>
-       </div>
+         <i class="material-icons right">list</i>
+
+           My Songs
+         </Link>
+       </Col>
+       <Col
+         s={12}
+         l={4}                  >
+         <Link
+           to="/mySongs"
+           style={{
+             width: "150px",
+             height: "150px",
+             borderRadius: "3px",
+             letterSpacing: "1.5px",
+             marginTop: "1rem"
+
+           }}
+           className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+         >
+         <i class="material-icons right">list</i>
+
+           My Songs
+         </Link>
+
+       </Col>
+     </Row>
+
+     <Button></Button>
+
+
+     <div className="col s12 center-align" style={{paddingTop: "10vh"}}>
+       <button
+         style={{
+           width: "150px",
+           borderRadius: "3px",
+           letterSpacing: "1.5px",
+           marginTop: "1rem"
+         }}
+         onClick={this.onLogoutClick}
+         className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+       >
+         Logout
+       </button>
+     </div>
+
       </React.Fragment>
      );
    }

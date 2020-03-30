@@ -22,28 +22,32 @@ class MySongs extends Component {
       ////////////////////LOGOUT BUTTON////////////////////////
       <React.Fragment>
       <div className="landing-copy col s12 center-align">
-        <div className="col s12 center-align" style={{padding: "1vh", background :"#c590bb", fontColor: "#FFF8E3"}}>
+        <div className="col s12 center-align" style={{padding: "1vh", fontColor: "#FFF8E3", background: 'none'}}>
           <h3>My Songs</h3>
         </div>
       </div>
       <br></br>
 
-      <Collapsible trigger="Song 1" open="true">
-      </Collapsible>
+      <Row style={{width: '90%'}}>
+      <Collapsible open='true' transitionTime="400" trigger="Song 2" style={{}} >
+        <Row>
+        <Col
+          style={{color: "white"}}
+          s={12}
+          l={8}                  >
+            <LyricEditor  />
+        </Col>
+        <Col
+          style={{color: "white"}}
+          s={12}
+          l={4}                  >
+            <LyricEditor />
+        </Col>
+        </Row>
+        </Collapsible>
 
-      <Collapsible  transitionTime="400" trigger="Song 2" >
-          <p>Lyrics</p>
-          <LyricEditor />
-          <hr></hr>
-          <p>Recordings</p>
-          <Player />
-          <hr></hr>
+       </Row>
 
-          <p>Chords</p>
-          <Chord />
-
-
-      </Collapsible>
 
 
 

@@ -23,9 +23,10 @@ import Player from "./components/audio/player";
 import Song from "./components/newSong/song";
 import MySongs from "./components/library/mySongs";
 import Chord from "./components/diagram/chord.js"
-
-
 import "./App.css";
+
+
+
 
 
 // Check for token to keep user logged in

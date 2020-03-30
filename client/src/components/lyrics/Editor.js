@@ -4,6 +4,8 @@ import Delta from 'quill-delta';
 import ReactQuill from 'react-quill'; // ES6
 import 'react-quill/dist/quill.snow.css'; // ES6
 import { Button, Card, Row, Col } from 'react-materialize';
+import Collapsible from 'react-collapsible';
+
 
 // import Chord;
 
@@ -49,7 +51,7 @@ onSubmit(e) {
     return (
 
       <ReactQuill
-          style={{width:'100%', padding:'0px', margin:'auto'}}
+          style={{width:'100%', padding:'0px', margin:'auto', color: '#383838'}}
           name="editor"
           modules={this.modules}
           onChange={this.handleChange}

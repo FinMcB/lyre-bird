@@ -16,40 +16,74 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import MediaQuery from 'react-responsive'
+import Records from "../recordings/Records.js"
+import FileUploader from 'react-firebase-file-uploader'
+import * as firebase from 'firebase';
+import config from '../firebaseConfig'
+firebase.initializeApp(config)
+
+
 
 
 
 class Song extends Component {
+  state = {
+     image: '',
+     imageURL: '',
+     progress: 0,
+   }
+
+   handleUploadStart = () => {
+     this.setState({
+       progress:0
+     })
+   }
+
+   handleUploadSuccess = filename => {
+     this.setState({
+       image: filename,
+       progress: 100
+     })
+
+
+     firebase.storage().ref('audio').child(filename).getDownloadURL().then(url => this.setState({
+       imageURL: url
+     }))
+   }
 
 
   render() {
 
+    console.log(this.state);
 
     return (
       ////////////////////LOGOUT BUTTON////////////////////////
       <React.Fragment>
+      <FileUploader
+                accept="image/*"
+                name='image'
+                storageRef={firebase.storage().ref('audio')}
+                onUploadStart={this.handleUploadStart}
+                onUploadSuccess={this.handleUploadSuccess}
+                 />
       <div className="landing-copy col s12 center-align">
-        <div className="col s12 center-align" style={{padding: "1vh", background :"#c590bb", fontColor: "#FFF8E3"}}>
-          <h5>Create a song</h5>
+        <div className="col s12 center-align" style={{padding: "1vh"}}>
+          <h3>Create </h3>
+            <h5>a song package</h5>
         </div>
       </div>
       <br></br>
-
-
-
-
 
         <Row>
         <Col
           style={{color: "white"}}
           s={12}
           l={4}                  >
-          <Collapsible trigger="Chords" open="true">
+          <Collapsible trigger="Lyrics" open="true">
             <LyricEditor />
           </Collapsible>
         </Col>
         <Col
-          textAlign= 'center-align'
           s={12}
           l={4}           >
           <Collapsible trigger="Chords" open="true">
@@ -59,8 +93,8 @@ class Song extends Component {
         <Col
           s={12}
           l={4}                  >
-          <Collapsible trigger="Chords" open="true">
-            <Player />
+          <Collapsible trigger="Recordings" open="true">
+            <Records />
           </Collapsible>
         </Col>
       </Row>
@@ -73,6 +107,16 @@ class Song extends Component {
     <FooterPlayer />
 
 
+    <Player />
+
+
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <li></li>
 
 
 

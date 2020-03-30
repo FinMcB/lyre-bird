@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 import But from "../button/index.js"
 import M from 'materialize-css'
 import { Button, Card, Row, Col } from 'react-materialize';
-import AudioPlayer from 'react-modular-audio-player';
 import FooterPlayer from "../footerPlayer/FooterPlayer"
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 import './playBtn.png'
+import './song.mp3'
 let playlist = [
   { src: "/song.mp3",
     title: "Vocals 1",
@@ -16,81 +18,60 @@ let playlist = [
 ];
 
 var style = {
-    backgroundColor: "#F8F8F8",
-    borderTop: "1px solid #E7E7E7",
+    backgroundColor: "#383838",
     textAlign: "center",
-    padding: "20px",
+    padding: "15px",
+    paddingBottom: '15px',
     position: "fixed",
     left: "0",
     bottom: "0",
-    height: "60px",
+    zIndex: '+100',
+    height: "13%",
     width: "100%",
 }
 
 var phantom = {
   display: 'block',
-  padding: '20px',
-  height: '60px',
+  padding: '0px',
+  height: '100%',
   width: '100%',
 }
 
-let rearrangedPlayer = [
-  {
-    className: "tier-top",
-    style: {margin: "0.3rem"},
-    innerComponents: [
-      {
-        type: "play",
-        style: {width: "fit-content"}
-      },
-      {
-        type: "rewind",
-        style: {width: "fit-content"}
-      },
-      {
-        type: "forward",
-        style: {width: "fit-content"}
-      },
-      {
-        type: "volume"
-      }
-    ]
-  },
-  {
-    className: "tier-bottom",
-    style: {margin: "0rem 0.3rem 0.3rem 0.3rem"},
-    innerComponents: [
-      {
-        type: "time",
-        style: {width: "fit-content"}
-      },
-      {
-        type: "seek"
-      }
-    ]
-  }
-]
+
+
+
+interface CustomIcons {
+
+  trim?: ReactNode
+}
+
+
 
 
 
 function Footer({ children }) {
     return (
+          <React.Fragment>
         <div>
             <div style={phantom} />
-            <div style={style}>
+            <div >
                 { children }
                 <AudioPlayer
-                // rearrange={rearrangedPlayer}
+                  style={style}
+                  
+                  src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+                  customControlSection
+                  onPlay={e => console.log("onPlay")}
+                  // other props here
+                />
 
-                  audioFiles={playlist}
-                  playIcon="/playBtn.png"
-                  playerWidth="100%"
-                  fontSize="1rem"
-                  iconSize="1.5rem"
-              />
+
             </div>
 
         </div>
+
+
+        </React.Fragment>
     )
 }
 

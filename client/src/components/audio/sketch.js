@@ -10,6 +10,8 @@ export default function sketch (p) {
   let micInitBtn = p.select('#micInitBtn');
   let recBtn = p.select('#recBtn').hide();
   let media;
+  var recBlob;
+  let one = 1;
 
 
 
@@ -22,10 +24,9 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
     //  slider.style('width', '80px');
     // recBtn.hide();
 
-    var cnv = p.createCanvas(p.windowWidth, 350, p.WEBGL);
-    cnv.style('display', 'inline');
+    // cnv.style('display', 'inline');
     // windowResized();
-
+    p.createCanvas(300, 50);
 
     var audioContext = new AudioContext();
     media = p5.MediaElement;
@@ -54,10 +55,17 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
     // create an empty sound file that we will use to playback the recording
     soundFile = new p5.SoundFile();
 
+    // window.onresize = function() {
+    //   // assigns new values for width and height variables
+    //   p.w = window.innerWidth;
+    //   p.h = window.innerHeight;
+    //   cnv.size(p.w,p.h);
+    // }
+
   }
 
   function windowResized() {
-    p.resizeCanvas(p.windowWidth);
+    p.resizeCanvas(p.windowWidth, p.windowHeight);
     }
 
   p.draw = function(){
@@ -169,14 +177,38 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
       let blobUrl = URL.createObjectURL(soundBlob);
       let htmlAudioElt = p.createAudio(blobUrl).showControls();
       console.log(soundBlob);
-      let serverUrl = 'https://jsonplaceholder.typicode.com/posts';
-      let httpRequestOptions = {
-        method: 'POST',
-        body: new FormData().append('soundBlob', soundBlob),
-        headers: new Headers({
-          'Content-Type': 'multipart/form-data'
-        })
-      }
+      let formdata = new FormData() ; //create a from to of data to upload to the server
+      formdata.append('soundBlob', soundBlob,  'myfiletosave.wav') ; // append the sound blob and the name of the file. third argument will show up on the server as req.file.originalname
+      // Now we can send the blob to a server...
+       var serverUrl = '../server.js'; //we've made a POST endpoint on the server at /upload
+       // //build a HTTP POST request
+       var httpRequestOptions = {
+         method: 'POST',
+         body: formdata , // with our form data packaged above
+         headers: new Headers({
+           'enctype': 'multipart/form-data' // the enctype is important to work with multer on the server
+         })
+       };
+       console.log(httpRequestOptions);
+       // use p5 to make the POST request at our URL and with our options
+       p.httpDo(
+         serverUrl,
+         httpRequestOptions,
+         (successStatusCode)=>{ //if we were successful...
+           console.log("uploaded recording successfully: " + successStatusCode)
+         },
+         (error)=>{console.error(error);}
+       )
+
+
+      // // let serverUrl = 'https://jsonplaceholder.typicode.com/posts';
+      // // let httpRequestOptions = {
+      // //   method: 'POST',
+      // //   body: new FormData().append('soundBlob', soundBlob),
+      // //   headers: new Headers({
+      // //     'Content-Type': 'multipart/form-data'
+      // //   })
+      // // }
       // p.httpDo(serverUrl, httpRequestOptions);
 
 
@@ -185,180 +217,3 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
     }
   }
 }
-
-
-  // var mic, recorder, soundFile, peaks, duration;
-  // var state = 'INIT';
-  // var currentLoopRange, loopRanges = [];
-  // let loopStartX, loopEndX;
-  //
-  // //cool effects if you don't stop previous loop here
-  // var stopPreviousLoop = false;
-  //
-  // p.setup = function ()  {
-  //   let myDiv = p.createDiv('click to start audio');
-  //   myDiv.position(p.width/2, 100);
-  //   p.createCanvas(p.windowWidth, p.windowHeight);
-  //
-  //
-  //   p.userStartAudio().then(function() {
-  //   myDiv.remove();
-  //   });
-  //   loopStartX = 0;
-  //   loopEndX = 0;
-  //   mic = new p5.AudioIn();
-  //   mic.start();
-  //   recorder = new p5.SoundRecorder();
-  //   recorder.setInput(mic);
-  //   p.pixelDensity(1);
-  //   // frameRate(10);
-  // }
-  //
-  // p.draw = function ()  {
-  //   p.background(255);
-  //   if(state === 'WAVEFORM'){
-  //     var pos = (soundFile.currentTime()/duration)*p.width;
-  //     drawWave();
-  //
-  //     //button boxes
-  //     p.fill(100,50);
-  //     p.rect(0,0,200,100);
-  //     p.rect(p.width-200,0,200,100);
-  //
-  //     //record button
-  //     p.fill(255,0,0);
-  //     p.ellipse(100, 50, 50, 50);
-  //
-  //     if(soundFile.isPlaying()){
-  //       //stop
-  //       p.rect(p.width-125, 25, 50, 50);
-  //     } else {
-  //       //play
-  //       p.triangle(p.width-125, 25,
-  //                p.width-100, 50,
-  //               p.width-125, 75);
-  //     }
-  //
-  //     //draw all the loop ranges
-  //     p.fill(100,50);
-  //     p.noStroke();
-  //     loopRanges.map(r=>{
-  //       p.rect(r.start,100,r.end-r.start,p.height);
-  //     });
-  //
-  //     //draw the play head
-  //     p.stroke(100);
-  //     p.line(pos,100,pos,p.height);
-  //
-  //   } else if(state === 'INIT'){
-  //     p.noStroke();
-  //     p.fill(255,0,0);
-  //     drawRecord();
-  //     p.fill(255);
-  //
-  //   } else if(state === 'RECORDING'){
-  //     if(p.frameCount % 50 === 0){
-  //       p.fill(100);
-  //     } else if(p.frameCount % 25 === 0){
-  //       p.fill(255,0,0);
-  //     }
-  //     drawRecord();
-  //   }
-  // }
-  //
-  // function drawWave(){
-  //   if(!peaks){return;}
-  //   p.noStroke();
-  //   p.fill(100);
-  //   p.beginShape();
-  //   p.vertex(0,p.height/2);
-  //   for(var i=0;i<peaks.length;i++){
-  //     p.vertex(i/peaks.length*p.width, p.height/2+peaks[i]*(p.height/2));
-  //   }
-  //   p.vertex(p.width,p.height/2);
-  //   p.endShape();
-  // }
-  //
-  // function isStopButton(){
-  //   return p.mouseY < 100 && p.mouseX > p.width-200;
-  // }
-  //
-  // function isRecordButton(){
-  //   return p.mouseY < 100 && p.mouseX < 200;
-  // }
-  //
-  // function mousePressed(){
-  //   if(state === 'WAVEFORM' && !isStopButton() && !isRecordButton()){
-  //     currentLoopRange = {start:p.mouseX,end:p.mouseX};
-  //     loopRanges.push(currentLoopRange)
-  //   }
-  //   return false;
-  // }
-  //
-  // function mouseDragged(){
-  //   if(currentLoopRange.end >= currentLoopRange.start){
-  //     currentLoopRange.end = p.mouseX;
-  //   }
-  //   return false;
-  // }
-  //
-  // function mouseReleased(){
-  //   console.log('mouseReleased state='+state);
-  //   if(state === 'WAVEFORM'){
-  //     console.log('isStopButton()='+isStopButton());
-  //     if(isStopButton()){
-  //       if(soundFile.isPlaying()){
-  //         soundFile.stop();
-  //         loopRanges = [];
-  //       } else {
-  //         soundFile.play();
-  //       }
-  //     } else if(isRecordButton()){
-  //       loopRanges = [];
-  //       state = 'INIT';
-  //       nextState();
-  //
-  //     } else if(soundFile){
-  //       //done dragging loop points
-  //
-  //       if(stopPreviousLoop){ soundFile.stop(); }
-  //
-  //       //loop([startTime],[rate],[amp],[cueLoopStart],[duration])
-  //       var start = currentLoopRange.start;
-  //       var end = currentLoopRange.end;
-  //       soundFile.loop(0,1,0.5,
-  //                (start/p.width)*duration,
-  //                ((end-start)/p.width)*duration);
-  //     }
-  //   } else {
-  //     nextState();
-  //   }
-  //   return false;
-  // }
-  //
-  // function drawRecord(){
-  //   p.ellipse(p.width*0.5,p.height*0.5,200,200);
-  // }
-  //
-  // function nextState() {
-  //   if (state === 'INIT' && mic.enabled) {
-  //     //start recording
-  //     if(soundFile){soundFile.stop();}
-  //     soundFile = new p5.SoundFile();
-  //     recorder.record(soundFile);
-  //     state = 'RECORDING';
-  //
-  //   } else if (state === 'RECORDING') {
-  //     //end recording
-  //     recorder.stop();
-  //     peaks = soundFile.getPeaks(1000);
-  //     duration = soundFile.duration();
-  //
-  //     //loop([startTime],[rate],[amp],[cueLoopStart],[duration])
-  //     if(stopPreviousLoop)soundFile.loop(0,1,0.5,0,duration);
-  //     // soundFile.loop(0,random(0,2),0.5,0,soundFile.duration());
-  //     // soundFile.play();
-  //     // save(soundFile, 'mySound.wav');
-  //     state = 'WAVEFORM';
-  //   }
-  // }
