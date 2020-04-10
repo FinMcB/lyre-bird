@@ -5,6 +5,11 @@ import sketch2 from './sketch2';
 import './style.css'
 import 'p5/lib/addons/p5.sound';
 import P5Wrapper from 'react-p5-wrapper';
+import { Button, Card, Row, Col } from 'react-materialize';
+
+import {note} from './sketch';
+import {freqDisplay} from './sketch';
+
 
 
 
@@ -14,6 +19,7 @@ class Tuner extends React.Component{
 
 	constructor(props) {
 		super(props);
+		this.note = note;
 		this.state = {
 			rotation: 0,
 			stateSketch: sketch,
@@ -29,14 +35,33 @@ class Tuner extends React.Component{
 	}
 
 	render () {
+		console.log(note,freqDisplay);
 		return (
-			<div className="col s1 center-align" style={{}}>
-			<div className="row">
-				<P5Wrapper sketch={sketch} />
+			<React.Fragment>
+
+			<div className="col s1 center-align" style={{borderRadius:'30px'}}>
+			<div style={{
+
+			    display: 'inline-block',
+			    width: '100%',
+					border: '10px solid black',
+					padding: 'none'
+			}} >
+				<P5Wrapper style={{paddingTop:'10vh', border:'1000px solid black', borderRadius:'30px'}}
+					sketch={sketch}  />
 
 			</div>
 		  </div>
-
+			<Row style={{}}>
+						 {/*//////////////NEW SONG//////////*/}
+				<Col
+					s={12}
+					l={4}           >
+					<h2>Hello {note}</h2>
+					<h2 id='freqH2'>Freq: {freqDisplay}</h2>
+				</Col>
+			</Row>
+			</React.Fragment>
 		// </div>
 		// 		<input type="range" value={this.state.rotation}  min="0"  max="360" step="1" onInput={this.rotationChange.bind(this)}/>
 		// 		<button onClick={this.pressEvent.bind(this)}>Change Sketch</button>

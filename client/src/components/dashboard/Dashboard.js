@@ -8,6 +8,9 @@ import M from 'materialize-css'
 import { Button, Card, Row, Col } from 'react-materialize';
 import { AwesomeButton } from "react-awesome-button";
 import AwesomeButtonStyles from "react-awesome-button/src/styles/styles.scss";
+import mySongLogo from './mySongs.png';
+import newSongLogo from './newSong.png';
+import tunerLogo from './tuner.png';
 
 
 
@@ -26,43 +29,56 @@ class Dashboard extends Component {
 
 
     return (
-      ////////////////////LOGOUT BUTTON////////////////////////
       <React.Fragment>
       <div>
-      <h1 style={{textAlign:'center'}}>Hello {this.props.user} signed in</h1>
+      <h2 style={{textAlign:'center'}}>Hello {this.props.user} signed in</h2>
       </div>
        <Row style={{textAlign: "center", marginTop:'10vh'}}>
-       <Col
-         style={{color: "white"}}
-         s={12}
-         l={4}                  >
-         <AwesomeButton type="primary" style={{width: "300px" ,height:"300px",    borderRadius: "3px",
-            padding: 'none',
-            letterSpacing: "1.5px",
-            marginTop: "1rem"}}>
-                My Songs
-            <img  src="https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png"
-            alt="my image"
-            style={{ maxWidth:'100%', maxHeight:'100%', zIndex:'+100'}}
-        />
+              {/*//////////////NEW SONG//////////*/}
+         <Col
+           textAlign= 'center-align'
+           s={12}
+           l={4}           >
+           <Link
 
-        <Link
+             to="/song"
+             style={{
+               width: "300px",
+               height: "300px",
+               borderRadius: "30px",
+               letterSpacing: "1.5px",
+               marginTop: "1rem"
 
-          to="/mySongs"></Link>
-        </AwesomeButton>
+             }}
 
-       </Col>
+             className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+           >
+
+             New Song
+             <img src={newSongLogo}
+               style={{
+                 position:"absolute",
+                 display:"inline-block",
+                 maxWidth: "100%",
+                 right:"0px",
+                 bottom: '0px'
+               }}/>
+           </Link>
+         </Col>
+
+         {/*//////////////TUNER//////////*/}
        <Col
          textAlign= 'center-align'
          s={12}
          l={4}           >
          <Link
 
-           to="/mySongs"
+           to="/guitarTuner"
            style={{
-             width: "150px",
-             height: "150px",
-             borderRadius: "3px",
+             width: "300px",
+
+             height: "300px",
+             borderRadius: "30px",
              letterSpacing: "1.5px",
              marginTop: "1rem"
 
@@ -70,35 +86,50 @@ class Dashboard extends Component {
 
            className="btn btn-large waves-effect waves-light hoverable blue accent-3"
          >
-         <i class="material-icons right">list</i>
 
-           My Songs
+           Tuner
+           <img src={tunerLogo}
+             style={{
+               position:"absolute",
+               display:"inline-block",
+               maxWidth: "100%",
+               right:"0px",
+               bottom: '0px'
+             }}/>
          </Link>
        </Col>
+
+       {/*//////////////MY SONGS//////////*/}
        <Col
+         textAlign= 'center-align'
          s={12}
-         l={4}                  >
+         l={4}           >
          <Link
            to="/mySongs"
            style={{
-             width: "150px",
-             height: "150px",
-             borderRadius: "3px",
+             width: "300px",
+             height: "300px",
+             borderRadius: "30px",
              letterSpacing: "1.5px",
              marginTop: "1rem"
 
            }}
+
            className="btn btn-large waves-effect waves-light hoverable blue accent-3"
          >
-         <i class="material-icons right">list</i>
 
            My Songs
+           <img src={mySongLogo}
+             style={{
+               position:"absolute",
+               display:"inline-block",
+               maxWidth: "100%",
+               right:"0px",
+               bottom: '0px'
+             }}/>
          </Link>
-
        </Col>
      </Row>
-
-     <Button></Button>
 
 
      <div className="col s12 center-align" style={{paddingTop: "10vh"}}>
@@ -115,7 +146,6 @@ class Dashboard extends Component {
          Logout
        </button>
      </div>
-
       </React.Fragment>
      );
    }
