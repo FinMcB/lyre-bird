@@ -55,6 +55,7 @@ class Song extends Component {
   render() {
 
     console.log(this.state);
+    console.log(LyricEditor.props);
 
     return (
       ////////////////////LOGOUT BUTTON////////////////////////
@@ -77,21 +78,21 @@ class Song extends Component {
         <Row>
         <Col
           style={{color: "white"}}
-          s={12}
+          s={11}
           l={4}                  >
           <Collapsible trigger="Lyrics" open="true">
-            <LyricEditor />
+            <LyricEditor content={this.props}/>
           </Collapsible>
         </Col>
         <Col
-          s={12}
+          s={11}
           l={4}           >
           <Collapsible trigger="Chords" open="true">
             <Chord />
           </Collapsible>
         </Col>
         <Col
-          s={12}
+          s={11}
           l={4}                  >
           <Collapsible trigger="Recordings" open="true">
             <Records />

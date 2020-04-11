@@ -10,7 +10,7 @@ import Collapsible from 'react-collapsible';
 // import Chord;
 
 
-let contents;
+let lyricContent;
 
 class LyricEditor extends React.Component {
   constructor(props) {
@@ -31,9 +31,9 @@ modules = {
 
 handleChange (content, delta, source, editor) {
  this.onSubmit();
- contents = editor.getContents();
- console.log(contents);
- console.log(delta);
+ lyricContent = editor.getContents();
+ // console.log(contents);
+ // console.log(delta);
 
 }
 
@@ -55,13 +55,14 @@ onSubmit(e) {
           name="editor"
           modules={this.modules}
           onChange={this.handleChange}
-          value={this.state.editor || ''} >
-
+          value={this.state.editor || ''}
+          >
       </ReactQuill>
     )
 
   }
 }
+
 
 const element = <h1>Hello, world</h1> ;
 ReactDOM.render(element, document.getElementById('root'));
@@ -71,7 +72,7 @@ ReactDOM.render(element, document.getElementById('root'));
 export default props => {
   return (
     <div className="row">
-      <LyricEditor />
+      <LyricEditor content={lyricContent}/>
     </div>
 
   )

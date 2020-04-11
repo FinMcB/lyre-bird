@@ -5,9 +5,10 @@ import sketch from './sketch';
 import 'p5/lib/addons/p5.sound';
 import multer from 'multer'
 import one from './sketch.js'
+import { Button, Card, Row, Col } from 'react-materialize';
 
 
-var style = {
+var p5style = {
     textAlign: "center",
     paddingBottom: '100px',
     position: "fixed",
@@ -37,16 +38,20 @@ class Player extends Component {
           <div>
               <div style={phantom} />
               <div >
-
-								<P5Wrapper sketch={sketch}  style={style} />
-                <a id="micInitBtn" className="btn-floating btn-large waves-effect waves-light #FFF8e3"><i className="material-icons">add</i></a>
-                <a id="recBtn" className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">mic</i></a>
-
+								<P5Wrapper sketch={sketch}  style={p5style} />
 								  </div>
               </div>
 
 
+              <a id="recBtn" className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">mic</i></a>
 
+              <Row>
+                <Col
+                  s={12}
+                  l={13}>
+              <Button id="micInitBtn" >save</Button>
+                </Col>
+              </Row>
 
 
         </React.Fragment>

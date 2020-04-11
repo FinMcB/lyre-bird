@@ -10,7 +10,9 @@ import Collapsible from 'react-collapsible';
 import LyricEditor from "../lyrics/Editor";
 import Tuner from "../tuner/guitarTuner";
 import Player from "../audio/player";
-import Chord from "../diagram/chord.js"
+import Chord from "../diagram/chord.js";
+import Records from "../recordings/Records.js";
+
 
 class MySongs extends Component {
 
@@ -41,7 +43,7 @@ class MySongs extends Component {
           style={{color: "white"}}
           s={12}
           l={4}                  >
-            <LyricEditor />
+            <Records />
         </Col>
         </Row>
         </Collapsible>

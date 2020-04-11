@@ -31,12 +31,11 @@ class Dashboard extends Component {
     return (
       <React.Fragment>
       <div>
-      <h2 style={{textAlign:'center'}}>Hello {this.props.user} signed in</h2>
+      <h3 style={{textAlign:'center'}}>Hello {this.props.user} signed in</h3>
       </div>
        <Row style={{textAlign: "center", marginTop:'10vh'}}>
               {/*//////////////NEW SONG//////////*/}
          <Col
-           textAlign= 'center-align'
            s={12}
            l={4}           >
            <Link

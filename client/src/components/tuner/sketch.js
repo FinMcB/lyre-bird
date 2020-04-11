@@ -6,6 +6,7 @@ import './style.css'
 import fontTest from "./quicksand.otf"
 let note;
 let freqDisplay;
+let value;
 
 
 
@@ -57,25 +58,32 @@ let notes = GUITAR_NOTES;
 
   p.setup = function () {
     // p.createCanvas(300,300, p.WEBGL);
+    let onBtn = p.createButton('ON');
+    onBtn.position(p.width/2, 200);
+    onBtn.mousePressed(turnOn);
+
+      var cnv = p.createCanvas(p.windowWidth, 400);
+      cnv.style('display', 'inline');
 
 
-    var cnv = p.createCanvas(p.displayWidth/2, 400);
-    cnv.style('display', 'inline');
 
+        value = 'Guitar';
+        if (value === 'Guitar') {
+          notes = GUITAR_NOTES;
+        }else if (value === 'Ukulele') {
+          notes = UKULELE_NOTES;
+        }
+
+
+
+
+
+
+  }
+
+  function turnOn(){
     mic = new p5.AudioIn(function(err){console.error("Err", err);});
     mic.start(micInitialized);
-    selection = p.createSelect();
-    selection.option('Ukulele');
-    selection.option('Guitar');
-    selection.changed(function(){
-      let value = selection.value();
-      value = 'Guitar';
-      if (value === 'Guitar') {
-        notes = GUITAR_NOTES;
-      }else if (value === 'Ukulele') {
-        notes = UKULELE_NOTES;
-      }
-    });
   }
 
   function micInitialized() {
@@ -95,8 +103,8 @@ function modelLoaded() {
     p.background(2,195,154);
     if(!initialized) {
       p.textSize(32);
-      p.textAlign(p.CENTER)
-      p.text("Loading Tuner...", p.width/2, p.height/2);
+      p.fill(54,54,54)
+      p.text("Turn On Tuner", p.width/2, p.height/2);
       return;
     }
     pitch.getPitch(function(err, f){
@@ -112,7 +120,7 @@ function modelLoaded() {
       p.fill(255 * multiplier, 255 * (1 - multiplier), 0);
 
       // let d = p.map(targetFreq + diff, 0, 440, 0, p.width - 100);
-      d = p.map(targetFreq + diff, 0, 440, p.width/4, p.width-p.width/4);
+      d = p.map(targetFreq + diff, 82.41, 329.63, p.width/4, p.width-p.width/4);
 
 
 

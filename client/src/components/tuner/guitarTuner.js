@@ -44,10 +44,9 @@ class Tuner extends React.Component{
 
 			    display: 'inline-block',
 			    width: '100%',
-					border: '10px solid black',
-					padding: 'none'
+					marginTop: '10vh',
 			}} >
-				<P5Wrapper style={{paddingTop:'10vh', border:'1000px solid black', borderRadius:'30px'}}
+				<P5Wrapper style={{}}
 					sketch={sketch}  />
 
 			</div>
@@ -57,8 +56,6 @@ class Tuner extends React.Component{
 				<Col
 					s={12}
 					l={4}           >
-					<h2>Hello {note}</h2>
-					<h2 id='freqH2'>Freq: {freqDisplay}</h2>
 				</Col>
 			</Row>
 			</React.Fragment>

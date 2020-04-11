@@ -26,11 +26,11 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
 
     // cnv.style('display', 'inline');
     // windowResized();
-    p.createCanvas(300, 50);
+    p.createCanvas(p.windowWidth, 80);
 
     var audioContext = new AudioContext();
     media = p5.MediaElement;
-    system = new ParticleSystem(p.createVector(0, 0));
+    system = new ParticleSystem(p.createVector(p.width/2, p.height/2));
 
     p.fill(0);
     p.text('Enable mic and click the mouse to begin recording', 20, 20);
@@ -90,7 +90,7 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
     p.stroke(recColour);
     p.strokeWeight(9);
     p.fill('rgba(2,128,144,1)');
-    p.ellipse(0,0, 80);
+    p.ellipse(p.width/2, p.height/2, 80);
 
   }
 
