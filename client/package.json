@@ -1,5 +1,6 @@
 {
   "name": "client",
+  "homepage": "https://finlaymcbride.panel.uwe.ac.uk/Year1-2/build/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

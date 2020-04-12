@@ -72,7 +72,7 @@ ReactDOM.render(element, document.getElementById('root'));
 export default props => {
   return (
     <div className="row">
-      <LyricEditor content={lyricContent}/>
+      <LyricEditor />
     </div>
 
   )

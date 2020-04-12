@@ -80,21 +80,21 @@ class Song extends Component {
           style={{color: "white"}}
           s={11}
           l={4}                  >
-          <Collapsible trigger="Lyrics" open="true">
-            <LyricEditor content={this.props}/>
+          <Collapsible trigger="Lyrics" open={true}>
+            <LyricEditor />
           </Collapsible>
         </Col>
         <Col
           s={11}
           l={4}           >
-          <Collapsible trigger="Chords" open="true">
+          <Collapsible trigger="Chords" open={true}>
             <Chord />
           </Collapsible>
         </Col>
         <Col
           s={11}
           l={4}                  >
-          <Collapsible trigger="Recordings" open="true">
+          <Collapsible trigger="Recordings" open={true}>
             <Records />
           </Collapsible>
         </Col>
