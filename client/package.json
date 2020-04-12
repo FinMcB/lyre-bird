@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "homepage": "http://myname.github.io/myapp",
+  "homepage": "https://obscure-basin-25042.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

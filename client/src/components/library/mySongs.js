@@ -31,7 +31,7 @@ class MySongs extends Component {
       <br></br>
 
       <Row style={{width: '90%'}}>
-      <Collapsible open='true' transitionTime="400" trigger="Song 2" style={{}} >
+      <Collapsible open={true} transitionTime={400} trigger="Song 2" style={{}} >
         <Row>
         <Col
           style={{color: "white"}}

@@ -46,9 +46,7 @@ class Tuner extends React.Component{
 			    width: '100%',
 					marginTop: '10vh',
 			}} >
-				<P5Wrapper style={{}}
-					sketch={sketch}  />
-
+				
 			</div>
 		  </div>
 			<Row style={{}}>
