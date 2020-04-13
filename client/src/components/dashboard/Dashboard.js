@@ -67,7 +67,6 @@ class Dashboard extends Component {
 
          {/*//////////////TUNER//////////*/}
        <Col
-         textAlign= 'center-align'
          s={12}
          l={4}           >
          <Link
@@ -100,7 +99,6 @@ class Dashboard extends Component {
 
        {/*//////////////MY SONGS//////////*/}
        <Col
-         textAlign= 'center-align'
          s={12}
          l={4}           >
          <Link

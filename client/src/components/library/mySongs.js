@@ -12,15 +12,21 @@ import Tuner from "../tuner/guitarTuner";
 import Player from "../audio/player";
 import Chord from "../diagram/chord.js";
 import Records from "../recordings/Records.js";
+import FooterPlayer from "../footerPlayer/FooterPlayer";
+import chordPic from "./chord.png"
 
+let pullLyrics = "This is where lyrics would be pulled from mongoDB as delta";
 
 class MySongs extends Component {
 
 
+
   render() {
 
+    console.log(LyricEditor);
 
     return (
+
       ////////////////////LOGOUT BUTTON////////////////////////
       <React.Fragment>
       <div className="landing-copy col s12 center-align">
@@ -31,13 +37,18 @@ class MySongs extends Component {
       <br></br>
 
       <Row style={{width: '90%'}}>
-      <Collapsible open={true} transitionTime={400} trigger="Song 2" style={{}} >
+      <Collapsible open={true} transitionTime={400} trigger="Song 1" style={{}} >
         <Row>
         <Col
           style={{color: "white"}}
           s={12}
           l={8}                  >
-            <LyricEditor  />
+          <LyricEditor placeholder='shiite' />
+
+        </Col>
+        <Col>
+          <img src={chordPic} style={{maxWidth: '20vw'}} />
+
         </Col>
         <Col
           style={{color: "white"}}
@@ -45,31 +56,39 @@ class MySongs extends Component {
           l={4}                  >
             <Records />
         </Col>
+
         </Row>
         </Collapsible>
-
        </Row>
 
+       <Row style={{width: '90%'}}>
+       <Collapsible open={true} transitionTime={400} trigger="Song 2" style={{}} >
+         <Row>
+         <Col
+           style={{color: "white"}}
+           s={12}
+           l={8}                  >
+             <LyricEditor/>
+         </Col>
+         <Col
+           style={{color: "white"}}
+           s={12}
+           l={4}                  >
+             <Records />
+         </Col>
+         </Row>
+         </Collapsible>
+        </Row>
+
+        <FooterPlayer />
+
+
+        <p style={{paddingBottom:'2000px'}}></p>
 
 
 
 
 
-
-
-       <div className="col s12 center-align" style={{paddingTop: "5vh"}}>
-         <button
-           style={{
-             width: "150px",
-             borderRadius: "3px",
-             letterSpacing: "1.5px",
-             marginTop: "0rem"
-           }}
-           className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-         >
-           save
-         </button>
-       </div>
       </React.Fragment>
      );
    }

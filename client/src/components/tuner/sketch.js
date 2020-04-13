@@ -52,6 +52,8 @@ const UKULELE_NOTES = {
 }
 
 let notes = GUITAR_NOTES;
+let freqHTML = p.select('#freqHTML');
+
 
 
 
@@ -62,7 +64,8 @@ let notes = GUITAR_NOTES;
     onBtn.position(p.width/2, 200);
     onBtn.mousePressed(turnOn);
 
-      var cnv = p.createCanvas(p.windowWidth, 400);
+
+      var cnv = p.createCanvas(600, 400);
       cnv.style('display', 'inline');
 
 
@@ -128,12 +131,10 @@ function modelLoaded() {
       p.textSize(32);
       p.text(note, p.width/2, p.height/2);
       displayFreq(f);
+      freqScale();
+      console.log(freqHTML);
+      freqHTML.elt.innerHTML = ("Detected Frequency: ", f);
     });
-    p.fill(54,54,54)
-    p.strokeWeight(8);
-    p.line(p.width/4,p.height/1.2,p.width-p.width/4,p.height/1.2);
-    p.strokeWeight(5);
-    p.line(d,p.height/1.2,d,p.height/1.4)
 
 
     // p.fill(0, 0, 0, 0);
@@ -155,6 +156,15 @@ function modelLoaded() {
       freqDisplay= f.toFixed(2);
       p.text(freqDisplay,p.width/2, p.height/2+500);
     }
+
+  }
+
+  function freqScale(){
+    p.fill(54,54,54)
+    p.strokeWeight(8);
+    p.line(p.width/4,p.height/1.2,p.width-p.width/4,p.height/1.2);
+    p.strokeWeight(5);
+    p.line(d,p.height/1.2,d,p.height/1.4)
 
   }
 

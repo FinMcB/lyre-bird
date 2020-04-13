@@ -12,12 +12,13 @@ import Collapsible from 'react-collapsible';
 
 let lyricContent;
 
-class LyricEditor extends React.Component {
+export default  class LyricEditor extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       text: "",
       error: '',
+      sampleText: 'This is where your lyrics go',
     };
 this.handleChange = this.handleChange.bind(this);
 }
@@ -29,11 +30,15 @@ modules = {
    ],
  }
 
+
+
 handleChange (content, delta, source, editor) {
  this.onSubmit();
  lyricContent = editor.getContents();
  // console.log(contents);
  // console.log(delta);
+ console.log(lyricContent.ops); //<p>testing</p>
+ console.log('DELTA INSERT: ', lyricContent.ops[0].insert)
 
 }
 
@@ -42,13 +47,13 @@ handleChange (content, delta, source, editor) {
 onSubmit(e) {
   let i = this.state.getContents;
  var background = this.state.editor;
- console.log('background', background); //<p>testing</p>
  //... rest of code]
   }
 
   render() {
 
     return (
+      <div className="row">
 
       <ReactQuill
           style={{width:'100%', padding:'0px', margin:'auto', color: '#383838'}}
@@ -56,8 +61,11 @@ onSubmit(e) {
           modules={this.modules}
           onChange={this.handleChange}
           value={this.state.editor || ''}
+          placeholder={this.state.sampleText}
+
           >
       </ReactQuill>
+    </div>
     )
 
   }
@@ -66,14 +74,3 @@ onSubmit(e) {
 
 const element = <h1>Hello, world</h1> ;
 ReactDOM.render(element, document.getElementById('root'));
-
-
-
-export default props => {
-  return (
-    <div className="row">
-      <LyricEditor />
-    </div>
-
-  )
-};

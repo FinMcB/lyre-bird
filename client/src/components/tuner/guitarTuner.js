@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import sketch from './sketch';
-import sketch2 from './sketch2';
 import './style.css'
 import 'p5/lib/addons/p5.sound';
 import P5Wrapper from 'react-p5-wrapper';
@@ -26,16 +25,12 @@ class Tuner extends React.Component{
 		};
 	}
 
-	rotationChange(e){
-		this.setState({rotation:e.target.value});
-	}
 
-	pressEvent(){
-		this.state.stateSketch === sketch ? this.setState({stateSketch:sketch2}) : this.setState({stateSketch:sketch});
-	}
+
+
+
 
 	render () {
-		console.log(note,freqDisplay);
 		return (
 			<React.Fragment>
 
@@ -46,15 +41,20 @@ class Tuner extends React.Component{
 			    width: '100%',
 					marginTop: '10vh',
 			}} >
-				
+
 			</div>
 		  </div>
 			<Row style={{}}>
-						 {/*//////////////NEW SONG//////////*/}
+				<P5Wrapper sketch={sketch}   />
 				<Col
 					s={12}
-					l={4}           >
+					l={4}
+    		>
+
 				</Col>
+
+				<h3>Detected Frequency:</h3>
+				<h4 id='freqHTML'></h4>
 			</Row>
 			</React.Fragment>
 		// </div>
