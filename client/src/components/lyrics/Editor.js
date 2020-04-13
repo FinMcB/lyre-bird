@@ -37,8 +37,8 @@ handleChange (content, delta, source, editor) {
  lyricContent = editor.getContents();
  // console.log(contents);
  // console.log(delta);
- console.log(lyricContent.ops); //<p>testing</p>
- console.log('DELTA INSERT: ', lyricContent.ops[0].insert)
+ console.log(lyricContent.ops);  //Delta Operations
+ console.log('DELTA INSERT: ', lyricContent.ops[0].insert) //Delta insert value
 
 }
 
