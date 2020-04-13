@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "homepage": "https://obscure-basin-25042.herokuapp.com/",
+  "homepage": "https://lyre-bird.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
