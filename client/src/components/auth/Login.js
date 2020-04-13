@@ -56,7 +56,7 @@ class Login extends Component {
       <div className="container">
         <div style={{ marginTop: "4rem" }} className="row">
           <div className="col s8 offset-s2">
-            <Link to="/" className="btn-flat waves-effect">
+            <Link to="/" style={{color: 'white'}} className="btn-flat waves-effect">
               <i className="material-icons left">keyboard_backspace</i> Back to
               home
             </Link>
@@ -64,8 +64,9 @@ class Login extends Component {
               <h4>
                 <b>Login</b> below
               </h4>
-              <p className="grey-text text-darken-1">
-                Don't have an account? <Link to="/register">Register</Link>
+              <p className="white-text">
+                Don't have an account? <Link style={{color:'#b978ad', border:'2px solid white', borderRadius:'5px', background:'#363636', padding:'8px', textAlign:'center',  verticalAlign: 'middle'
+}} to="/register">Register</Link>
               </p>
             </div>
             <form noValidate onSubmit={this.onSubmit}>

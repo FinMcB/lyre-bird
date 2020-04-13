@@ -34,28 +34,14 @@ class Tuner extends React.Component{
 		return (
 			<React.Fragment>
 
-			<div className="col s1 center-align" style={{borderRadius:'30px'}}>
-			<div style={{
 
-			    display: 'inline-block',
-			    width: '100%',
-					marginTop: '10vh',
-			}} >
-
-			</div>
-		  </div>
-			<Row style={{}}>
+				<div style={{paddingTop: "0vh", alignContent: 'center', textAlign: 'center', background: 'rgb(2,195,154)'}}>
 				<P5Wrapper sketch={sketch}   />
-				<Col
-					s={12}
-					l={4}
-    		>
+				</div>
 
-				</Col>
 
 				<h3>Detected Frequency:</h3>
 				<h4 id='freqHTML'></h4>
-			</Row>
 			</React.Fragment>
 		// </div>
 		// 		<input type="range" value={this.state.rotation}  min="0"  max="360" step="1" onInput={this.rotationChange.bind(this)}/>

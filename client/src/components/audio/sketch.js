@@ -19,14 +19,9 @@ export default function sketch (p) {
 let state = 0; // mousePress will increment from Record, to Stop, to Play
 
   p.setup = function(){
-    // slider = p.createSlider(0, 255, 100);
-    //  slider.position(200, 400);
-    //  slider.style('width', '80px');
-    // recBtn.hide();
 
-    // cnv.style('display', 'inline');
-    // windowResized();
-    p.createCanvas(p.windowWidth, 80);
+    let cnv = p.createCanvas(375, 80);
+
 
     var audioContext = new AudioContext();
     media = p5.MediaElement;
@@ -55,12 +50,7 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
     // create an empty sound file that we will use to playback the recording
     soundFile = new p5.SoundFile();
 
-    // window.onresize = function() {
-    //   // assigns new values for width and height variables
-    //   p.w = window.innerWidth;
-    //   p.h = window.innerHeight;
-    //   cnv.size(p.w,p.h);
-    // }
+
 
   }
 
@@ -69,20 +59,12 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
     }
 
   p.draw = function(){
-    p.background(51);
-  // console.log(state);
-  // console.log("mic active ? : " + mic.enabled)
-  // console.log("mic source ? : " + mic.currentSource)
-  //  console.log("mic input ? : " + mic.input)
+    p.background(54,54,54);
     if(mic){
       vol = mic.getLevel();
       // console.log(vol);
 
     };
-
-
-
-    // console.log(state);
 
     system.addParticle();
     system.run();
@@ -170,21 +152,27 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
       recColour = p.color('rgba(159, 70, 143,0.8)');
       p.background(0, 255, 0);
       p.text('Recording stopped. Click to play & save', 20, 20);
-      state++;
-    } else if (state === 2) {
-      // soundFile.play(); // play the result!
       soundBlob = soundFile.getBlob();
       let blobUrl = URL.createObjectURL(soundBlob);
       let htmlAudioElt = p.createAudio(blobUrl).showControls();
+      if (htmlAudioElt){
+        state++;
+      }
+      state++;
+    } else if (state === 2) {
+
+
       console.log(soundBlob);
-      let formdata = new FormData() ; //create a from to of data to upload to the server
-      formdata.append('soundBlob', soundBlob,  'myfiletosave.wav') ; // append the sound blob and the name of the file. third argument will show up on the server as req.file.originalname
+
+      let formdata = new FormData() ; //create a formdata to upload
+      formdata.append('soundBlob', soundBlob,  'rec.wav') ; // append the sound blob and the name of the file. third argument will show up on the server as req.file.originalname
       // Now we can send the blob to a server...
-       var serverUrl = '../server.js'; //we've made a POST endpoint on the server at /upload
+       var serverUrl = '../server.js'; //  (need to make a POST endpoint on server)
+
        // //build a HTTP POST request
        var httpRequestOptions = {
          method: 'POST',
-         body: formdata , // with our form data packaged above
+         body: formdata ,
          headers: new Headers({
            'enctype': 'multipart/form-data' // the enctype is important to work with multer on the server
          })
@@ -200,20 +188,6 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
          (error)=>{console.error(error);}
        )
 
-
-      // // let serverUrl = 'https://jsonplaceholder.typicode.com/posts';
-      // // let httpRequestOptions = {
-      // //   method: 'POST',
-      // //   body: new FormData().append('soundBlob', soundBlob),
-      // //   headers: new Headers({
-      // //     'Content-Type': 'multipart/form-data'
-      // //   })
-      // // }
-      // p.httpDo(serverUrl, httpRequestOptions);
-
-
-      // p.saveSound(soundFile, 'mySound.wav'); // save file
-      state++;
     }
   }
 }

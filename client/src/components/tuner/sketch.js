@@ -65,7 +65,7 @@ let freqHTML = p.select('#freqHTML');
     onBtn.mousePressed(turnOn);
 
 
-      var cnv = p.createCanvas(600, 400);
+      var cnv = p.createCanvas(375, 400);
       cnv.style('display', 'inline');
 
 
@@ -105,7 +105,7 @@ function modelLoaded() {
 
     p.background(2,195,154);
     if(!initialized) {
-      p.textSize(32);
+      p.textSize(20);
       p.fill(54,54,54)
       p.text("Turn On Tuner", p.width/2, p.height/2);
       return;

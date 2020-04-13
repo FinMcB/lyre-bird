@@ -3,16 +3,15 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
-import But from "../button/index.js"
 import M from 'materialize-css'
 import { Button, Card, Row, Col } from 'react-materialize';
 import FooterPlayer from "../footerPlayer/FooterPlayer"
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import './playBtn.png'
-import './song.mp3'
+import song from './song.wav'
 let playlist = [
-  { src: "/song.mp3",
+  { src: "/song.wav",
     title: "Vocals 1",
     artist: "0" }
 ];
@@ -58,8 +57,8 @@ function Footer({ children }) {
                 { children }
                 <AudioPlayer
                   style={style}
-                  
-                  src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+
+                  src={song}
                   customControlSection
                   onPlay={e => console.log("onPlay")}
                   // other props here

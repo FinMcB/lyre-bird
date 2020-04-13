@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
-import But from "../button/index.js"
 import M from 'materialize-css'
 import { Button, Card, Row, Col } from 'react-materialize';
 import { AwesomeButton } from "react-awesome-button";
@@ -30,10 +29,14 @@ class Dashboard extends Component {
 
     return (
       <React.Fragment>
-      <div>
-      <h3 style={{textAlign:'center'}}>Hello {this.props.user} signed in</h3>
-      </div>
-       <Row style={{textAlign: "center", marginTop:'10vh'}}>
+        <div style={{ marginTop: "3vh", marginBottom: '0vh' }} className="container valign-wrapper">
+               <div className="row">
+                 <h3 style={{textAlign:'center'}}>Hello {user.name.split(" ")[0]} </h3>
+                   <h5 style={{textAlign:'center'}}>you are signed into lyre-bird</h5>
+
+               </div>
+        </div>
+       <Row style={{textAlign: "center", marginTop:'3vh'}}>
               {/*//////////////NEW SONG//////////*/}
          <Col
            s={12}
@@ -132,7 +135,7 @@ class Dashboard extends Component {
      <div className="col s12 center-align" style={{paddingTop: "10vh"}}>
        <button
          style={{
-           width: "150px",
+           width: "15opx",
            borderRadius: "3px",
            letterSpacing: "1.5px",
            marginTop: "1rem"
@@ -143,6 +146,9 @@ class Dashboard extends Component {
          Logout
        </button>
      </div>
+
+     <p style={{paddingBottom:'1500px'}}></p>
+
       </React.Fragment>
      );
    }

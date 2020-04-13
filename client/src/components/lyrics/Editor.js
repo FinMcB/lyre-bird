@@ -12,6 +12,7 @@ import Collapsible from 'react-collapsible';
 
 let lyricContent;
 
+
 export default  class LyricEditor extends React.Component {
   constructor(props) {
     super(props)
@@ -26,8 +27,8 @@ this.handleChange = this.handleChange.bind(this);
 modules = {
    toolbar: [
      [{ 'header': [1, 2, false] }],
-     ['bold']
-   ],
+     ['bold'],['size']
+      ],
  }
 
 
@@ -70,7 +71,3 @@ onSubmit(e) {
 
   }
 }
-
-
-const element = <h1>Hello, world</h1> ;
-ReactDOM.render(element, document.getElementById('root'));

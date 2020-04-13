@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { Link } from "react-router-dom";
-import But from "../button/index.js"
 import M from 'materialize-css'
 import { Button, Card, Row, Col } from 'react-materialize';
 import LyricEditor from "../lyrics/Editor";
@@ -20,6 +19,8 @@ import Records from "../recordings/Records.js"
 import FileUploader from 'react-firebase-file-uploader'
 import * as firebase from 'firebase';
 import config from '../firebaseConfig'
+import chordPic from "./chord.png"
+
 firebase.initializeApp(config)
 
 
@@ -28,8 +29,8 @@ firebase.initializeApp(config)
 
 class Song extends Component {
   state = {
-     image: '',
-     imageURL: '',
+     audio: '',
+     audioURL: '',
      progress: 0,
    }
 
@@ -41,13 +42,13 @@ class Song extends Component {
 
    handleUploadSuccess = filename => {
      this.setState({
-       image: filename,
+       audio: filename,
        progress: 100
      })
 
 
      firebase.storage().ref('audio').child(filename).getDownloadURL().then(url => this.setState({
-       imageURL: url
+       audioURL: url
      }))
    }
 
@@ -55,18 +56,11 @@ class Song extends Component {
   render() {
 
     console.log(this.state);
-    console.log(LyricEditor.props);
 
     return (
       ////////////////////LOGOUT BUTTON////////////////////////
       <React.Fragment>
-      <FileUploader
-                accept="image/*"
-                name='image'
-                storageRef={firebase.storage().ref('audio')}
-                onUploadStart={this.handleUploadStart}
-                onUploadSuccess={this.handleUploadSuccess}
-                 />
+
       <div className="landing-copy col s12 center-align">
         <div className="col s12 center-align" style={{padding: "1vh"}}>
           <h3>Create </h3>
@@ -88,7 +82,12 @@ class Song extends Component {
           s={11}
           l={4}           >
           <Collapsible trigger="Chords" open={true}>
-            <Chord />
+            <img src={chordPic} style={{maxWidth: '10vw', padding:'10px'}}/>
+              <img src={chordPic} style={{maxWidth: '10vw', padding:'10px'}}/>
+                <img src={chordPic} style={{maxWidth: '10vw', padding:'10px'}}/>
+
+
+
           </Collapsible>
         </Col>
         <Col
@@ -96,22 +95,23 @@ class Song extends Component {
           l={4}                  >
           <Collapsible trigger="Recordings" open={true}>
             <Records />
+              <FileUploader
+                        accept="audio/*"
+                        name='recording'
+                        storageRef={firebase.storage().ref('audio')}
+                        onUploadStart={this.handleUploadStart}
+                        onUploadSuccess={this.handleUploadSuccess}
+                         />
           </Collapsible>
         </Col>
       </Row>
 
 
-
-
-
+        <Player style={{display:'block', textAlign:'center', alignContent:'center' }} />
 
     <FooterPlayer />
 
 
-    <Player />
-
-
-    <p style={{paddingBottom:'2000px'}}></p>
 
 
 
@@ -119,22 +119,25 @@ class Song extends Component {
 
 
 
+    <div className="col s12 center-align" style={{paddingTop: "5vh"}}>
+      <button
+        style={{
+          width: "150px",
+          borderRadius: "3px",
+          letterSpacing: "1.5px",
+          marginTop: "1rem"
+        }}
+        onClick={this.onLogoutClick}
+        className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+      >
+        SAVE
+      </button>
+    </div>
 
 
 
-       <div className="col s12 center-align" style={{paddingTop: "5vh"}}>
-         <button
-           style={{
-             width: "150px",
-             borderRadius: "3px",
-             letterSpacing: "1.5px",
-             marginTop: "0rem"
-           }}
-           className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-         >
-           save
-         </button>
-       </div>
+    <p style={{paddingBottom:'800px'}}></p>
+
       </React.Fragment>
      );
    }

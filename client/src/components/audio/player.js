@@ -35,22 +35,28 @@ class Player extends Component {
       render(){
         return(
           <React.Fragment>
-          <div>
-              <div style={phantom} />
-              <div >
+            <div style={{paddingTop: "0vh", alignContent: 'center', textAlign: 'center', background: '#363636'}}>
+
 								<P5Wrapper sketch={sketch}  style={p5style} />
-								  </div>
-              </div>
 
+                </div>
 
-              <a id="recBtn" className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">mic</i></a>
 
               <Row>
                 <Col
-                  s={12}
-                  l={13}>
-              <Button id="micInitBtn" >save</Button>
+                  s={6}
+                  l={6}>
+              <Button id="micInitBtn" >INITIATE MIC</Button>
+
                 </Col>
+                <Col
+                  s={6}
+                  l={6}
+                  >
+                <Button style={{background:'#F53C3C'}} id="recBtn" class="material-icons" >mic</Button>
+
+
+                  </Col>
               </Row>
 
 
