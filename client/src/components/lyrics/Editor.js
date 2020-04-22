@@ -33,11 +33,9 @@ modules = {
 
 
 
-handleChange (content, delta, source, editor) {
+handleChange (content, delta, source, editor) {  //value returned on keypress
  this.onSubmit();
  lyricContent = editor.getContents();
- // console.log(contents);
- // console.log(delta);
  console.log(lyricContent.ops);  //Delta Operations
  console.log('DELTA INSERT: ', lyricContent.ops[0].insert) //Delta insert value
 

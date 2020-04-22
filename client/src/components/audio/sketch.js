@@ -138,7 +138,7 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
   };
 
   function record() {
-    // use the '.enabled' boolean to make sure user enabled the mic (otherwise we'd record silence)
+    //  make sure user enabled the mic
     if (state === 0 && mic.enabled) {
       // Tell recorder to record to a p5.SoundFile which we will use for playback
       recorder.record(soundFile);
@@ -151,7 +151,6 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
       recorder.stop(); // stop recorder, and send the result to soundFile
       recColour = p.color('rgba(159, 70, 143,0.8)');
       p.background(0, 255, 0);
-      p.text('Recording stopped. Click to play & save', 20, 20);
       soundBlob = soundFile.getBlob();
       let blobUrl = URL.createObjectURL(soundBlob);
       let htmlAudioElt = p.createAudio(blobUrl).showControls();
@@ -167,7 +166,7 @@ let state = 0; // mousePress will increment from Record, to Stop, to Play
       let formdata = new FormData() ; //create a formdata to upload
       formdata.append('soundBlob', soundBlob,  'rec.wav') ; // append the sound blob and the name of the file. third argument will show up on the server as req.file.originalname
       // Now we can send the blob to a server...
-       var serverUrl = '../server.js'; //  (need to make a POST endpoint on server)
+       var serverUrl = '../server.js'; //  (make a POST endpoint on server)
 
        // //build a HTTP POST request
        var httpRequestOptions = {

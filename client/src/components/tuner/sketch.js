@@ -28,7 +28,6 @@ export default function sketch (p) {
   let d;
   let targetFreq;
   let diff;
-  let multiplier;
   let last;
 
 
@@ -44,12 +43,7 @@ export default function sketch (p) {
   'E4': 329.63,
 };
 
-const UKULELE_NOTES = {
-  'G4': 392.00,
-  'C4': 261.63,
-  'E4': 329.63,
-  'A4': 440.00,
-}
+
 
 let notes = GUITAR_NOTES;
 let freqHTML = p.select('#freqHTML');
@@ -71,11 +65,8 @@ let freqHTML = p.select('#freqHTML');
 
 
         value = 'Guitar';
-        if (value === 'Guitar') {
           notes = GUITAR_NOTES;
-        }else if (value === 'Ukulele') {
-          notes = UKULELE_NOTES;
-        }
+
 
 
 
@@ -110,20 +101,18 @@ function modelLoaded() {
       p.text("Turn On Tuner", p.width/2, p.height/2);
       return;
     }
-    pitch.getPitch(function(err, f){
+    pitch.getPitch(function(err, f){ //retrieves pitch with error first callback
       note = getClosestNote(f);
       targetFreq = notes[note];
       diff = f - targetFreq;
-      if (p.abs(diff) < THRESHOLD){
+      if (p.abs(diff) < THRESHOLD){  //displays whether a note is correct with 2hz threshold
         diff = 0;
         display("Perfect!");
       }
       p.strokeWeight(0);
-      multiplier = p.abs(diff / (targetFreq * 0.2));
-      p.fill(255 * multiplier, 255 * (1 - multiplier), 0);
 
-      // let d = p.map(targetFreq + diff, 0, 440, 0, p.width - 100);
-      d = p.map(targetFreq + diff, 82.41, 329.63, p.width/4, p.width-p.width/4);
+
+      d = p.map(targetFreq + diff, 82.41, 329.63, p.width/4, p.width-p.width/4); //visual scale of guitar strings
 
 
 
@@ -132,7 +121,6 @@ function modelLoaded() {
       p.text(note, p.width/2, p.height/2);
       displayFreq(f);
       freqScale();
-      console.log(freqHTML);
       freqHTML.elt.innerHTML = ("Detected Frequency: ", f);
     });
 
